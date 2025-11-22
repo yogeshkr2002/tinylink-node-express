@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TinyLink - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+      }
+      .truncate-ellipsis {
+        max-width: 360px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen text-gray-800">
+    <header class="bg-white shadow-sm">
+      <div
+        class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between"
+      >
+        <div class="flex items-center space-x-3">
+          <h1 class="text-2xl font-bold">TinyLink</h1>
+          <p class="text-sm text-gray-500">URL shortener - Dashboard</p>
+        </div>
+        <div class="text-sm text-gray-500">
+          Logged in as <strong>Candidate</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+      <section class="bg-white shadow rounded-lg p-6 mb-6">
+        <h2 class="text-lg font-semibold mb-4">Create a short link</h2>
+        <form
+          id="create-form"
+          class="grid grid-cols-1 md:grid-cols-6 gap-3 items-center"
+        >
+          <div class="md:col-span-3">
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Long URL</label
+            >
+            <input
+              id="url"
+              type="url"
+              placeholder="https://example.com"
+              required
+              class="w-full rounded border-gray-200 shadow-sm focus:ring-2 focus:ring-indigo-200 px-3 py-2"
+            />
+            <p id="url-error" class="text-xs text-red-600 mt-1 hidden"></p>
+          </div>
+
+          <div class="md:col-span-1">
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Custom code</label
+            >
+            <input
+              id="code"
+              type="text"
+              placeholder="6-8 char(Optional)"
+              maxlength="8"
+              class="w-full rounded border-gray-200 shadow-sm px-3 py-2"
+            />
+          </div>
+
+          <div class="md:col-span-1">
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Title</label
+            >
+            <input
+              id="title"
+              type="text"
+              placeholder="title (optional)"
+              class="w-full rounded border-gray-200 shadow-sm px-3 py-2"
+            />
+          </div>
+
+          <div class="md:col-span-1 flex items-end">
+            <button
+              id="create-btn"
+              class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 disabled:opacity-60"
+            >
+              Create
+            </button>
+          </div>
+        </form>
+        <p id="create-success" class="text-sm text-green-600 mt-3 hidden"></p>
+        <p id="create-fail" class="text-sm text-red-600 mt-3 hidden"></p>
+      </section>
+
+      <section class="bg-white shadow rounded-lg p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold">Your links</h2>
+          <div class="flex items-center space-x-2">
+            <input
+              id="search"
+              placeholder="Search by code or URL"
+              class="rounded border-gray-200 shadow-sm px-3 py-2"
+            />
+            <button
+              id="refresh"
+              title="Refresh list"
+              class="px-3 py-2 border rounded"
+            >
+              Refresh
+            </button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="text-sm text-gray-600">
+                <th class="px-3 py-2 border-b">Code</th>
+                <th class="px-3 py-2 border-b">URL</th>
+                <th class="px-3 py-2 border-b">Clicks</th>
+                <th class="px-3 py-2 border-b">Last clicked</th>
+                <th class="px-3 py-2 border-b">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="links-body" class="text-sm">
+              <!-- rows go here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="max-w-6xl mx-auto px-4 py-6 text-center text-xs text-gray-400"
+    >
+      TinyLink - Demo · Powered by Node + Express · Candidate submission
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
